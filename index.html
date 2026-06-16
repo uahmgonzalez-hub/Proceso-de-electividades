@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#f58b1f">
+<title>Carta de Postulación a Electividades 2026 · Liceo Teniente Dagoberto Godoy Nº3</title>
+
+<!-- Fuentes y librerías -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<style>
+:root{
+  --brand:#0b5db6;--brand-strong:#0a4f9d;--orange:#f58b1f;
+  --bg:#f4f7fb;--card:#fff;--ink:#1f2937;--muted:#555;
+  --border:#e7eefb;--radius:18px;--shadow-sm:0 8px 18px rgba(10,79,157,.10);
+}
+body{
+  margin:0;
+  font-family:"Montserrat",sans-serif;
+  color:var(--ink);
+  background:var(--bg);
+  display:grid;
+  grid-template-rows:auto 1fr auto;
+  min-height:100dvh;
+  overflow-x:hidden;
+  font-size: 13px;
+}
+.brandbar{
+  background:linear-gradient(90deg,#f58b1f,#f3a24a 30%,#4783cf 75%,#0b5db6 100%);
+  color:#fff;
+  padding: 6px 0;
+}
+.brandbar-inner{
+  max-width:980px;
+  margin:0 auto;
+  padding:6px 16px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.logo-colegio{
+  height:60px;
+  width:auto;
+  object-fit:contain;
+}
+.wrap{
+  max-width:980px;
+  margin:15px auto;
+  padding:0 16px;
+}
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:18px;
+  box-shadow:var(--shadow-sm);
+}
+h1{
+  font-size:1.3rem;
+  margin:0 0 12px;
+  font-weight:700;
+  color:var(--brand-strong);
+  text-align:center;
+}
+h2{
+  margin-top:18px;
+  color:var(--brand-strong);
+  font-size:1.1rem;
+}
+label{
+  font-weight:600;
+  display:block;
+  margin-bottom:4px;
+}
+input,select{
+  width:100%;
+  padding:8px 10px;
+  border:1px solid #dce6f7;
+  border-radius:8px;
+  margin:2px 0 10px;
+  font-size:13px;
+  box-sizing:border-box;
+}
+button{
+  background:var(--orange);
+  color:#fff;
+  font-weight:700;
+  border:none;
+  border-radius:10px;
+  padding:10px 18px;
+  cursor:pointer;
+  display:block;
+  margin:20px auto 0;
+  box-shadow:0 6px 14px rgba(245,139,31,.25);
+  transition:.2s;
+  font-size:13px;
+}
+button:hover{
+  background:#e57e12;
+}
+footer{
+  text-align:center;
+  font-size:.8rem;
+  color:var(--muted);
+  padding:10px;
+  border-top:1px solid #e9eef9;
+  background:#f6f9ff;
+}
+canvas{
+  border:1px solid #ccc;
+  border-radius:8px;
+  width:100%;
+  max-width:300px;
+  height:100px;
+  touch-action:none;
+  background:#fff;
+}
+.clear-btn{
+  background:#fff;
+  color:#555;
+  border:1px solid #ccc;
+  padding:4px 8px;
+  border-radius:6px;
+  margin-top:4px;
+  cursor:pointer;
+  font-size:11px;
+}
+.clear-btn:hover{
+  background:#eee;
+}
+
+/* Estilos para impresión optimizados */
+@media print{
+  .brandbar,.clear-btn,button,footer{
+    display:none !important;
+  }
+  .card{
+    box-shadow:none;
+    border:none;
+    margin:0;
+    padding:8px;
+    background:white;
+  }
+  body{
+    background:white;
+    font-size:12px;
+  }
+  h1{
+    font-size:1.2rem;
+    margin-bottom:6px;
+  }
+  @page{
+    size:A4;
+    margin:0.7cm;
+  }
+}
+
+/* Layout optimizado para los bloques */
+.bloque-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 15px;
+  margin: 15px 0;
+}
+
+.bloque-item {
+  background: #f8fafd;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #e1e8f7;
+}
+
+.bloque-item h3 {
+  margin: 0 0 10px 0;
+  font-size: 1rem;
+  color: var(--brand-strong);
+  text-align: center;
+  background: var(--brand);
+  color: white;
+  padding: 6px;
+  border-radius: 6px;
+}
+
+.opcion-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px dashed #e1e8f7;
+  gap: 10px;
+}
+
+.opcion-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.opcion-item label {
+  flex: 1;
+  margin: 0;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 1.3;
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+}
+
+.opcion-item select {
+  width: 60px;
+  margin: 0;
+  padding: 6px;
+  flex-shrink: 0;
+}
+
+.firmas-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-top: 15px;
+  gap: 15px;
+  padding: 15px;
+  background: #f8fafd;
+  border-radius: 10px;
+  border: 1px solid #e1e8f7;
+}
+
+.firma-box {
+  text-align: center;
+  flex: 1;
+  min-width: 150px;
+}
+
+.firma-box b {
+  font-size: 12px;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.declaracion {
+  background: #fff8e1;
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #ffeaa7;
+  margin: 20px 0;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.instruccion-bloques {
+  background: #e8f4ff;
+  padding: 12px;
+  border-radius: 8px;
+  margin: 15px 0;
+  font-size: 0.9rem;
+  text-align: center;
+  border: 1px solid #cce0ff;
+}
+
+/* Estilos para el selector de curso */
+.curso-selector {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 5px;
+}
+
+.curso-selector select {
+  width: auto;
+  min-width: 100px;
+  margin: 0;
+}
+
+/* Estilos para mensajes de validación */
+.mensaje-validacion {
+  padding: 10px;
+  border-radius: 8px;
+  margin: 10px 0;
+  text-align: center;
+  font-weight: 600;
+}
+
+.mensaje-error {
+  background: #ffeaea;
+  color: #d63031;
+  border: 1px solid #fab1a0;
+}
+
+.mensaje-exito {
+  background: #e8f6ef;
+  color: #27ae60;
+  border: 1px solid #82e0aa;
+}
+
+/* Estilos para campos requeridos */
+.campo-requerido {
+  border-color: #f58b1f !important;
+  background-color: #fffaf3 !important;
+}
+
+.campo-error {
+  border-color: #d63031 !important;
+  background-color: #ffeaea !important;
+}
+
+.texto-error {
+  color: #d63031;
+  font-size: 11px;
+  margin-top: -8px;
+  margin-bottom: 8px;
+  display: block;
+  text-align: center;
+  line-height: 1.3;
+}
+
+.firma-vacia {
+  border-color: #d63031 !important;
+  background-color: #ffeaea !important;
+}
+
+/* Mejoras específicas para textos largos */
+.texto-materia {
+  font-size: 11px;
+  line-height: 1.3;
+  hyphens: auto;
+  word-wrap: break-word;
+}
+
+.instruccion-compacta {
+  font-size: 10px;
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+/* Estilos para validación de RUT */
+.rut-valido {
+  border-color: #27ae60 !important;
+  background-color: #f0fff4 !important;
+}
+
+.rut-invalido {
+  border-color: #d63031 !important;
+  background-color: #ffeaea !important;
+}
+
+.ayuda-rut {
+  font-size: 10px;
+  color: #666;
+  margin-top: -8px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+/* Ajustes para impresión */
+@media print {
+  .opcion-item label {
+    font-size: 10px;
+  }
+  .texto-error, .ayuda-rut {
+    display: none !important;
+  }
+}
+</style>
+</head>
+
+<body>
+<!-- Encabezado -->
+<div class="brandbar">
+  <div class="brandbar-inner">
+    <img src="img/logo_colegio.png" class="logo-colegio" alt="Logo Liceo">
+    <div>
+      <div><b>Red Crecemos</b></div>
+      <div>Liceo Teniente Dagoberto Godoy Nº3</div>
+    </div>
+  </div>
+</div>
+
+<!-- Formulario -->
+<div class="wrap" id="formulario">
+  <div class="card">
+    <h1>CARTA DE POSTULACIÓN A ELECTIVIDADES 2026</h1>
+    <p><b>Selección de electivos de formación diferenciada Humanista-Científico para el 2026</b></p>
+
+    <div id="mensaje-rut" class="mensaje-validacion" style="display:none;"></div>
+
+    <p>Yo, 
+      <input id="apellido" placeholder="Primer apellido, Segundo apellido" class="campo-requerido"> 
+      <input id="nombre" placeholder="Primer nombre, Segundo nombre" class="campo-requerido">
+      RUT: <input id="rut_estudiante" placeholder="12345678-9" style="max-width:200px;" class="campo-requerido" onblur="validarFormatoRUT('rut_estudiante')">
+      <span class="ayuda-rut">Formato: 12345678-9 (guión obligatorio)</span>,
+      estudiante del curso 
+      <span class="curso-selector">
+        <select id="curso" class="campo-requerido">
+          <option value="" selected disabled>-- Selecciona tu curso --</option>
+          <option value="2°M A 2025">2°M A 2025</option>
+          <option value="2°M B 2025">2°M B 2025</option>
+          <option value="2°M C 2025">2°M C 2025</option>
+        </select>
+      </span>
+      , declaro por medio de este documento, mi intención de electividad para el año 2026 en el establecimiento Liceo Teniente Dagoberto Godoy N°3 Lo Prado.
+    </p>
+
+    <p>En conocimiento de mi apoderado 
+      <input id="apoderado" placeholder="Primer apellido, Segundo apellido, Primer nombre, Segundo nombre" class="campo-requerido">
+      RUT: <input id="rut_apoderado" placeholder="12345678-9" style="max-width:220px;" class="campo-requerido" onblur="validarFormatoRUT('rut_apoderado')">
+      <span class="ayuda-rut">Formato: 12345678-9 (guión obligatorio)</span>, procedo a declarar mi elección para las siguientes asignaturas electivas:
+    </p>
+
+    <div class="instruccion-bloques">
+      <b>Para esto debo numerar los tres bloques, en donde el 1 será mi primera elección y el número 3 será mi electivo de menor preferencia.</b>
+    </div>
+
+    <div class="bloque-grid">
+      <div class="bloque-item">
+        <h3>BLOQUE 1</h3>
+        <div class="instruccion-compacta">
+          <b>1-Primera preferencia | 2-Segunda preferencia | 3-Tercera preferencia</b>
+        </div>
+        <div class="opcion-item">
+          <label class="texto-materia">Geografía, Territorio y Desafíos Socioambientales</label>
+          <select id="b1_op1" onchange="validarBloque('b1')" class="campo-requerido">
+            <option value=""></option><option>1</option><option>2</option><option>3</option>
+          </select>
+        </div>
+        <div class="opcion-item">
+          <label class="texto-materia">Participación y Argumentación en Democracia</label>
+          <select id="b1_op2" onchange="validarBloque('b1')" class="campo-requerido">
+            <option value=""></option><option>1</option><option>2</option><option>3</option>
+          </select>
+        </div>
+        <div class="opcion-item">
+          <label class="texto-materia">Estética</label>
+          <select id="b1_op3" onchange="validarBloque('b1')" class="campo-requerido">
+            <option value=""></option><option>1</option><option>2</option><option>3</option>
+          </select>
+        </div>
+        <div id="error-b1" class="texto-error" style="display:none;">⚠️ Completa todas las preferencias del Bloque 1</div>
+      </div>
+
+      <div class="bloque-item">
+        <h3>BLOQUE 2</h3>
+        <div class="instruccion-compacta">
+          <b>1-Primera preferencia | 2-Segunda preferencia | 3-Tercera preferencia</b>
+        </div>
+        <div class="opcion-item">
+          <label class="texto-materia">Probabilidades y Estadísticas Descriptivas e Inferencial</label>
+          <select id="b2_op1" onchange="validarBloque('b2')" class="campo-requerido">
+            <option value=""></option><option>1</option><option>2</option><option>3</option>
+          </select>
+        </div>
+        <div class="opcion-item">
+          <label class="texto-materia">Física</label>
+          <select id="b2_op2" onchange="validarBloque('b2')" class="campo-requerido">
+            <option value=""></option><option>1</option><option>2</option><option>3</option>
+          </select>
+        </div>
+        <div class="opcion-item">
+          <label class="texto-materia">Biología de los Ecosistemas</label>
+          <select id="b2_op3" onchange="validarBloque('b2')" class="campo-requerido">
+            <option value=""></option><option>1</option><option>2</option><option>3</option>
+          </select>
+        </div>
+        <div id="error-b2" class="texto-error" style="display:none;">⚠️ Completa todas las preferencias del Bloque 2</div>
+      </div>
+
+      <div class="bloque-item">
+        <h3>BLOQUE 3</h3>
+        <div class="instruccion-compacta">
+          <b>1-Primera preferencia | 2-Segunda preferencia | 3-Tercera preferencia</b>
+        </div>
+        <div class="opcion-item">
+          <label class="texto-materia">Creación y Composición Musical</label>
+          <select id="b3_op1" onchange="validarBloque('b3')" class="campo-requerido">
+            <option value=""></option><option>1</option><option>2</option><option>3</option>
+          </select>
+        </div>
+        <div class="opcion-item">
+          <label class="texto-materia">Artes Visuales y Audiovisuales</label>
+          <select id="b3_op2" onchange="validarBloque('b3')" class="campo-requerido">
+            <option value=""></option><option>1</option><option>2</option><option>3</option>
+          </select>
+        </div>
+        <div class="opcion-item">
+          <label class="texto-materia">Economía y Sociedad</label>
+          <select id="b3_op3" onchange="validarBloque('b3')" class="campo-requerido">
+            <option value=""></option><option>1</option><option>2</option><option>3</option>
+          </select>
+        </div>
+        <div id="error-b3" class="texto-error" style="display:none;">⚠️ Completa todas las preferencias del Bloque 3</div>
+      </div>
+    </div>
+
+    <div class="declaracion">
+      <p><b>Declaro que esta postulación será enviada digitalmente antes del 07 de noviembre a las 13:00 hrs.</b></p>
+      <p><b>Acepto que, en caso de no enviar este formulario a tiempo, seré asignado a los electivos disponibles según demanda.</b></p>
+    </div>
+
+    <div class="firmas-container">
+      <div class="firma-box">
+        <b>Firma Estudiante <span class="texto-error"></span></b>
+        <canvas id="firma_estudiante"></canvas>
+        <button class="clear-btn" onclick="limpiarFirma('firma_estudiante')">Limpiar</button>
+        <div style="margin-top: 5px; font-size: 11px;">RUT: <span id="rut_estudiante_display"></span></div>
+        <div id="error-firma-estudiante" class="texto-error" style="display:none;">⚠️ Firma requerida</div>
+      </div>
+      <div class="firma-box">
+        <b>Firma Apoderado <span class="texto-error"></span></b>
+        <canvas id="firma_apoderado"></canvas>
+        <button class="clear-btn" onclick="limpiarFirma('firma_apoderado')">Limpiar</button>
+        <div style="margin-top: 5px; font-size: 11px;">RUT: <span id="rut_apoderado_display"></span></div>
+        <div id="error-firma-apoderado" class="texto-error" style="display:none;">⚠️ Firma requerida</div>
+      </div>
+    </div>
+
+    <button onclick="validarFormularioCompleto()" id="btn-enviar">Enviar Postulación</button>
+  </div>
+</div>
+
+<footer>© 2025 Red Crecemos — Liceo Teniente Dagoberto Godoy Nº3.</footer>
+
+<script>
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwj39DtDzexrYa1MpBCJrnBG63Kzm1PkhkSs2wAtohaIxC_P9iqRi6LOKeMvallZx2Idg/exec";
+let rutYaEnviado = false;
+let firmaEstudianteDibujada = false;
+let firmaApoderadoDibujada = false;
+
+// Función para validar formato de RUT con guión obligatorio
+function validarFormatoRUT(idCampo) {
+  const campo = document.getElementById(idCampo);
+  const rut = campo.value.trim();
+  
+  // Expresión regular para validar formato: números + guión + número o K
+  const regexRUT = /^[0-9]{7,8}-[0-9kK]{1}$/;
+  
+  if (!rut) {
+    campo.classList.remove('rut-valido', 'rut-invalido');
+    return false;
+  }
+  
+  if (regexRUT.test(rut)) {
+    campo.classList.remove('rut-invalido');
+    campo.classList.add('rut-valido');
+    return true;
+  } else {
+    campo.classList.remove('rut-valido');
+    campo.classList.add('rut-invalido');
+    
+    // Mostrar mensaje de ayuda si el usuario está escribiendo
+    if (rut.length > 0 && !rut.includes('-')) {
+      campo.setAttribute('title', 'El RUT debe incluir un guión (ej: 12345678-9)');
+    }
+    
+    return false;
+  }
+}
+
+// Función para validar RUT único antes de enviar
+async function validarRUTUnico() {
+  const rutInput = document.getElementById('rut_estudiante');
+  const rut = rutInput.value.trim();
+  const mensajeDiv = document.getElementById('mensaje-rut');
+  const btnEnviar = document.getElementById('btn-enviar');
+  
+  if (!rut) {
+    mensajeDiv.style.display = 'none';
+    btnEnviar.disabled = false;
+    return true;
+  }
+  
+  // Primero validar formato
+  if (!validarFormatoRUT('rut_estudiante')) {
+    mensajeDiv.innerHTML = '❌ Formato de RUT inválido. Debe incluir guión (ej: 12345678-9).';
+    mensajeDiv.className = 'mensaje-validacion mensaje-error';
+    mensajeDiv.style.display = 'block';
+    btnEnviar.disabled = true;
+    return false;
+  }
+  
+  try {
+    const response = await fetch(`${SCRIPT_URL}?action=verificarRUT&rut=${encodeURIComponent(rut)}`);
+    const resultado = await response.text();
+    
+    if (resultado === 'EXISTE') {
+      mensajeDiv.innerHTML = '❌ Este RUT ya ha enviado una postulación anteriormente.';
+      mensajeDiv.className = 'mensaje-validacion mensaje-error';
+      mensajeDiv.style.display = 'block';
+      btnEnviar.disabled = true;
+      rutYaEnviado = true;
+      return false;
+    } else {
+      mensajeDiv.style.display = 'none';
+      btnEnviar.disabled = false;
+      rutYaEnviado = false;
+      return true;
+    }
+  } catch (error) {
+    console.error('Error al verificar RUT:', error);
+    mensajeDiv.style.display = 'none';
+    btnEnviar.disabled = false;
+    return true;
+  }
+}
+
+function validarBloque(b){
+  const selects = document.querySelectorAll(`[id^="${b}_op"]`);
+  const usados = new Set();
+  let hasError = false;
+  let todosLlenos = true;
+  
+  selects.forEach(sel => {
+    if(sel.value && usados.has(sel.value)){
+      alert("⚠️ No puedes repetir el mismo número dentro del mismo bloque.");
+      sel.value = "";
+      hasError = true;
+    } else if(sel.value){
+      usados.add(sel.value);
+    }
+    
+    // Verificar si todos los campos están llenos
+    if (!sel.value) {
+      todosLlenos = false;
+    }
+  });
+  
+  // Mostrar/ocultar mensaje de error del bloque
+  const errorDiv = document.getElementById(`error-${b}`);
+  if (errorDiv) {
+    errorDiv.style.display = todosLlenos ? 'none' : 'block';
+  }
+  
+  return !hasError && todosLlenos;
+}
+
+function initFirma(id){
+  const c = document.getElementById(id);
+  c.width = c.offsetWidth;
+  c.height = c.offsetHeight;
+  const ctx = c.getContext("2d");
+  let d = false;
+  
+  const get = e => {
+    const r = c.getBoundingClientRect();
+    const x = (e.touches ? e.touches[0].clientX : e.clientX) - r.left;
+    const y = (e.touches ? e.touches[0].clientY : e.clientY) - r.top;
+    return {x, y};
+  };
+  
+  const start = e => { 
+    d = true; 
+    const {x, y} = get(e); 
+    ctx.beginPath(); 
+    ctx.moveTo(x, y); 
+    
+    // Marcar como dibujada
+    if (id === 'firma_estudiante') {
+      firmaEstudianteDibujada = true;
+      document.getElementById('error-firma-estudiante').style.display = 'none';
+      c.classList.remove('firma-vacia');
+    } else if (id === 'firma_apoderado') {
+      firmaApoderadoDibujada = true;
+      document.getElementById('error-firma-apoderado').style.display = 'none';
+      c.classList.remove('firma-vacia');
+    }
+  }
+  
+  const stop = () => { d = false; ctx.beginPath(); }
+  
+  const move = e => { 
+    if(!d) return; 
+    e.preventDefault(); 
+    const {x, y} = get(e); 
+    ctx.lineWidth = 2; 
+    ctx.lineCap = "round"; 
+    ctx.strokeStyle = "#000"; 
+    ctx.lineTo(x, y); 
+    ctx.stroke(); 
+    ctx.beginPath(); 
+    ctx.moveTo(x, y); 
+  }
+  
+  c.addEventListener("mousedown", start);
+  c.addEventListener("mouseup", stop);
+  c.addEventListener("mousemove", move);
+  c.addEventListener("touchstart", start, {passive: false});
+  c.addEventListener("touchend", stop, {passive: false});
+  c.addEventListener("touchmove", move, {passive: false});
+}
+
+function limpiarFirma(id){
+  const c = document.getElementById(id);
+  c.getContext("2d").clearRect(0, 0, c.width, c.height);
+  
+  if (id === 'firma_estudiante') {
+    firmaEstudianteDibujada = false;
+    document.getElementById('error-firma-estudiante').style.display = 'block';
+    c.classList.add('firma-vacia');
+  } else if (id === 'firma_apoderado') {
+    firmaApoderadoDibujada = false;
+    document.getElementById('error-firma-apoderado').style.display = 'block';
+    c.classList.add('firma-vacia');
+  }
+}
+
+// Validar campos de texto en tiempo real
+function validarCampoTexto(id) {
+  const campo = document.getElementById(id);
+  const valor = campo.value.trim();
+  
+  if (!valor) {
+    campo.classList.add('campo-error');
+    return false;
+  } else {
+    campo.classList.remove('campo-error');
+    return true;
+  }
+}
+
+// Validar selección de curso
+function validarCurso() {
+  const curso = document.getElementById('curso');
+  const valor = curso.value;
+  
+  if (!valor) {
+    curso.classList.add('campo-error');
+    return false;
+  } else {
+    curso.classList.remove('campo-error');
+    return true;
+  }
+}
+
+// Validar TODOS los campos antes de enviar
+function validarFormularioCompleto() {
+  let formularioValido = true;
+  
+  // Validar campos de texto
+  const camposTexto = ['apellido', 'nombre', 'apoderado'];
+  camposTexto.forEach(campo => {
+    if (!validarCampoTexto(campo)) {
+      formularioValido = false;
+    }
+  });
+  
+  // Validar RUTs con formato correcto
+  if (!validarFormatoRUT('rut_estudiante')) {
+    formularioValido = false;
+    document.getElementById('rut_estudiante').classList.add('campo-error');
+  }
+  
+  if (!validarFormatoRUT('rut_apoderado')) {
+    formularioValido = false;
+    document.getElementById('rut_apoderado').classList.add('campo-error');
+  }
+  
+  // Validar curso
+  if (!validarCurso()) {
+    formularioValido = false;
+  }
+  
+  // Validar bloques
+  const bloques = ['b1', 'b2', 'b3'];
+  bloques.forEach(bloque => {
+    if (!validarBloque(bloque)) {
+      formularioValido = false;
+    }
+  });
+  
+  // Validar firmas
+  if (!firmaEstudianteDibujada) {
+    document.getElementById('error-firma-estudiante').style.display = 'block';
+    document.getElementById('firma_estudiante').classList.add('firma-vacia');
+    formularioValido = false;
+  }
+  
+  if (!firmaApoderadoDibujada) {
+    document.getElementById('error-firma-apoderado').style.display = 'block';
+    document.getElementById('firma_apoderado').classList.add('firma-vacia');
+    formularioValido = false;
+  }
+  
+  if (formularioValido) {
+    guardarYEnviar();
+  } else {
+    alert("⚠️ Por favor, completa todos los campos obligatorios antes de enviar. Asegúrate de que los RUT tengan el formato correcto (12345678-9).");
+    // Scroll al primer error
+    const primerError = document.querySelector('.campo-error, .firma-vacia, .rut-invalido');
+    if (primerError) {
+      primerError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+}
+
+// Actualizar RUT en tiempo real
+document.getElementById('rut_estudiante').addEventListener('input', function(e) {
+  document.getElementById('rut_estudiante_display').textContent = e.target.value;
+  validarFormatoRUT('rut_estudiante');
+});
+
+document.getElementById('rut_apoderado').addEventListener('input', function(e) {
+  document.getElementById('rut_apoderado_display').textContent = e.target.value;
+  validarFormatoRUT('rut_apoderado');
+});
+
+// Agregar validación en tiempo real para otros campos
+document.getElementById('apellido').addEventListener('blur', function() { validarCampoTexto('apellido'); });
+document.getElementById('nombre').addEventListener('blur', function() { validarCampoTexto('nombre'); });
+document.getElementById('apoderado').addEventListener('blur', function() { validarCampoTexto('apoderado'); });
+document.getElementById('curso').addEventListener('change', validarCurso);
+
+// ✅ FUNCIÓN OPTIMIZADA - MÁS RÁPIDA Y CON MEJOR MANEJO DE ERRORES
+async function guardarYEnviar(){
+  const btn = document.getElementById('btn-enviar');
+  const originalText = btn.textContent;
+  
+  try{
+    // Mostrar indicador de carga
+    btn.textContent = "⏳ Generando PDF...";
+    btn.disabled = true;
+
+    const apellido = document.getElementById("apellido").value.trim();
+    const nombre = document.getElementById("nombre").value.trim();
+    const rut = document.getElementById("rut_estudiante").value.trim();
+    const curso = document.getElementById("curso").value;
+    const apoderado = document.getElementById("apoderado").value.trim();
+    const rutApo = document.getElementById("rut_apoderado").value.trim();
+
+    // Validación final del RUT
+    if (!await validarRUTUnico()) {
+      alert("❌ No se puede enviar el formulario. Este RUT ya tiene una postulación registrada.");
+      btn.textContent = originalText;
+      btn.disabled = false;
+      return;
+    }
+
+    const form = document.getElementById("formulario");
+    
+    btn.textContent = "⏳ Capturando pantalla...";
+    
+    // CONFIGURACIÓN OPTIMIZADA - MÁS RÁPIDA
+    const canvas = await html2canvas(form, {
+      scale: 1.5, // Reducido de 2 a 1.5 para mejor performance
+      useCORS: true,
+      logging: false,
+      backgroundColor: '#ffffff',
+      removeContainer: true,
+      width: form.scrollWidth,
+      height: form.scrollHeight,
+      onclone: function(clonedDoc) {
+        // Ocultar botones durante la captura para mejor apariencia
+        const buttons = clonedDoc.querySelectorAll('button, .clear-btn');
+        buttons.forEach(btn => btn.style.display = 'none');
+        
+        // Ocultar mensajes de error durante la captura
+        const mensajesError = clonedDoc.querySelectorAll('.texto-error, .ayuda-rut');
+        mensajesError.forEach(msg => msg.style.display = 'none');
+        
+        // Quitar estilos de error durante la captura
+        const camposError = clonedDoc.querySelectorAll('.campo-error, .firma-vacia, .rut-invalido');
+        camposError.forEach(campo => {
+          campo.classList.remove('campo-error', 'firma-vacia', 'rut-invalido');
+          campo.classList.add('campo-requerido');
+        });
+        
+        // Aplicar estilos de RUT válido
+        const rutsValidos = clonedDoc.querySelectorAll('.rut-valido');
+        rutsValidos.forEach(campo => {
+          campo.classList.remove('rut-valido');
+          campo.classList.add('campo-requerido');
+        });
+      }
+    });
+    
+    btn.textContent = "⏳ Creando PDF...";
+    
+    // Usar JPEG para reducir tamaño (80% calidad - buen balance)
+    const imgData = canvas.toDataURL("image/jpeg", 0.8);
+
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF("p", "mm", "a4");
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    const pageHeight = pdf.internal.pageSize.getHeight();
+
+    // Calcular dimensiones con márgenes
+    const imgWidth = pageWidth - 20; // Margen de 10mm cada lado
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+    let position = 0;
+    let heightLeft = imgHeight;
+
+    // Añadir primera página
+    pdf.addImage(imgData, "JPEG", 10, position, imgWidth, imgHeight);
+    heightLeft -= pageHeight;
+
+    // Añadir páginas adicionales si es necesario
+    while(heightLeft > 0){
+      position = heightLeft - imgHeight;
+      pdf.addPage();
+      pdf.addImage(imgData, "JPEG", 10, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
+    }
+
+    const pdfBase64 = pdf.output("datauristring");
+
+    // Preparar datos del formulario
+    const data = new FormData();
+    data.append("nombre", `${apellido.toUpperCase()} ${nombre}`);
+    data.append("rutEstudiante", rut);
+    data.append("curso", curso);
+    data.append("apoderado", apoderado);
+    data.append("rutApoderado", rutApo);
+    data.append("b1_op1", document.getElementById('b1_op1').value);
+    data.append("b1_op2", document.getElementById('b1_op2').value);
+    data.append("b1_op3", document.getElementById('b1_op3').value);
+    data.append("b2_op1", document.getElementById('b2_op1').value);
+    data.append("b2_op2", document.getElementById('b2_op2').value);
+    data.append("b2_op3", document.getElementById('b2_op3').value);
+    data.append("b3_op1", document.getElementById('b3_op1').value);
+    data.append("b3_op2", document.getElementById('b3_op2').value);
+    data.append("b3_op3", document.getElementById('b3_op3').value);
+    data.append("documento", pdfBase64);
+
+    // Enviar con timeout más realista
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 25000); // 25 segundos
+
+    btn.textContent = "⏳ Enviando...";
+    
+    const res = await fetch(SCRIPT_URL, {
+      method: "POST",
+      body: data,
+      signal: controller.signal
+    });
+    
+    clearTimeout(timeoutId);
+    
+    if (!res.ok) {
+      throw new Error(`Error del servidor: ${res.status}`);
+    }
+    
+    const txt = await res.text();
+
+    if(txt.startsWith("http")) {
+      alert("✅ Postulación enviada correctamente.");
+      window.print();
+    } else {
+      alert("❌ Error: " + txt);
+    }
+
+  } catch(e) {
+    if(e.name === 'AbortError') {
+      alert("❌ Tiempo de espera agotado. El servidor está tardando demasiado. Intenta nuevamente.");
+    } else {
+      alert("❌ Error: " + e.message);
+      console.error("Error detallado:", e);
+    }
+  } finally {
+    btn.textContent = originalText;
+    btn.disabled = false;
+  }
+}
+
+window.onload = () => {
+  initFirma("firma_estudiante");
+  initFirma("firma_apoderado");
+  
+  // Inicializar firmas como vacías
+  document.getElementById('firma_estudiante').classList.add('firma-vacia');
+  document.getElementById('firma_apoderado').classList.add('firma-vacia');
+};
+</script>
+</body>
+</html>
